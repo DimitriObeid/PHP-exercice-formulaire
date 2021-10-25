@@ -7,6 +7,8 @@
                 /** @var DateTime */
                 public $date;
 
+                public $published = false;
+                
                 public function __construct() {
                     // this will be explained when we get to re-creating the object
                     // after a POST request
@@ -24,7 +26,7 @@
                 * @param mixed $value The input's initial value. This parameter also determines the input's type.
                 * @return string
                 */
-                public function MakeInput(string $name, $value): string
+                public static function MakeInput(string $name, $value): string
                 {
                     $type = gettype($value);
                     $label = sprintf('<label for="%1$s">%1$s</label>', $name);
@@ -59,7 +61,7 @@
                     return $label . $input;
                 }
 
-                public function MakeInputs(string $class_name): array
+                public static function MakeInputs(string $class_name): array
                 {
                     $inputs = [];
                     $instance = new $class_name();
@@ -90,7 +92,7 @@
                     return $html;
                 }
 
-                public function MakeClassFromArray(string $class_name, array $values)
+                public static function MakeClassFromArray(string $class_name, array $values)
                 {
                     $class = new ReflectionClass($class_name);
                     // we do not call the constructor yet
